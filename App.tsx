@@ -8,10 +8,11 @@
 import { NewAppScreen } from '@react-native/new-app-screen';
 import { NavigationContainer } from '@react-navigation/native';
 import { Provider } from 'react-redux';
-import { store } from './redux/store';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
-import LoginView from './src/login';
+import LoginView from './src/loginView.tsx';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import SuccessView from './src/successView.tsx';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,13 +20,14 @@ function App() {
   const isDarkMode = useColorScheme() === 'dark';
 
   return (
-    <Provider store={store}>
+    <SafeAreaProvider>
       <NavigationContainer>
           <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name="loginView" component={LoginView}/>
+            <Stack.Screen name="successView" component={SuccessView}/>
           </Stack.Navigator>
         </NavigationContainer>
-      </Provider>
+      </SafeAreaProvider>
   );
 }
 
